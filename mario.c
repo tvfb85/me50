@@ -27,13 +27,13 @@ int main(void)
             printf(" ");
         }
 
-        // Builds the left pyramid
+        // Builds row for left pyramid
         build_pyramid(i);
 
         // Print the 'gap'
         printf("  ");
 
-        // Builds the right pyramid
+        // Builds row for right pyramid
         build_pyramid(i);
 
         // Finish the row with a new line

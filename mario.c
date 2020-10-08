@@ -16,6 +16,7 @@ int main(void)
     // Loop through positive numbers from 1 until input height
     for (int i = 1; i <= height; i++)
     {
+        // Calculate remaining spaces for row
         int spaces = height - i;
 
         for (int k = 0; k < spaces; k++)
@@ -23,7 +24,7 @@ int main(void)
             printf(" ");
         }
 
-        for (int j = 0; j <= i; j++)
+        for (int j = 0; j < i; j++)
         {
             printf("#");
         }

@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    // Ask user for input
+    // Ask user for height input
     int height = get_int("What's the height?\n");
 
     // Re-prompt the user until a valid number is given
@@ -20,13 +20,13 @@ int main(void)
         int spaces = height - i;
 
         // Print a space character for each of the spaces
-        for (int k = 0; k < spaces; k++)
+        for (int j = 0; j < spaces; j++)
         {
             printf(" ");
         }
 
         // Print a hash for each of the outer loop's count
-        for (int j = 0; j < i; j++)
+        for (int k = 0; k < i; k++)
         {
             printf("#");
         }

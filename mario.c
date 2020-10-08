@@ -16,19 +16,22 @@ int main(void)
     // Loop through positive numbers from 1 until input height
     for (int i = 1; i <= height; i++)
     {
-        // Calculate remaining spaces for row
+        // Calculate spaces for row
         int spaces = height - i;
 
+        // Print a space character for each of the spaces
         for (int k = 0; k < spaces; k++)
         {
             printf(" ");
         }
 
+        // Print a hash for each of the outer loop's count
         for (int j = 0; j < i; j++)
         {
             printf("#");
         }
 
+        // Finish the row with a new line
         printf("\n");
     }
 }

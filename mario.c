@@ -3,17 +3,20 @@
 
 int main(void)
 {
+    // Ask user for input
     int height = get_int("What's the height?\n");
 
+    // Re-prompt the user until a valid number is given
     while (height < 1 || height > 8)
     {
         printf("Try again, %i is invalid\n", height);
         height = get_int("What's the height?\n");
     }
 
-    for (int i = 0; i < height; i++)
+    // Loop through positive numbers from 1 until input height
+    for (int i = 1; i <= height; i++)
     {
-        int spaces = (height - i) - 1;
+        int spaces = height - i;
 
         for (int k = 0; k < spaces; k++)
         {

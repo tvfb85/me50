@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <cs50.h>
 
-void build_pyramid( int width);
+void build_pyramid(int width);
 
 int main(void)
 {
@@ -41,10 +41,10 @@ int main(void)
     }
 }
 
-void build_pyramid( int width )
+void build_pyramid(int width)
 {
     // Print a hash for each of the outer loop's count
-   for (int i = 0; i < width; i++)
+    for (int i = 0; i < width; i++)
     {
         printf("#");
     }

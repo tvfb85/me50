@@ -5,15 +5,13 @@ void build_pyramid(int width);
 
 int main(void)
 {
-    // Ask user for height input
-    int height = get_int("What's the height?\n");
+    int height;
 
-    // Re-prompt the user until a valid number is given
-    while (height < 1 || height > 8)
+    do
     {
-        printf("Try again, %i is invalid\n", height);
         height = get_int("What's the height?\n");
     }
+    while(height < 1 || height > 8);
 
     // Loop through positive numbers from 1 until input height
     for (int i = 1; i <= height; i++)

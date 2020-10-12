@@ -3,15 +3,15 @@
 
 int main(void)
 {
-    // Ask user for height input
-    int height = get_int("What's the height?\n");
+    // initialize height variable
+    int height;
 
-    // Re-prompt the user until a valid number is given
-    while (height < 1 || height > 8)
+    // Ask user for height input and re-prompt if input is invalid
+    do
     {
-        printf("Try again, %i is invalid\n", height);
-        height = get_int("What's the height?\n");
+        height = get_int("Height: ");
     }
+    while (height < 1 || height > 8);
 
     // Loop through positive numbers from 1 until input height
     for (int i = 1; i <= height; i++)

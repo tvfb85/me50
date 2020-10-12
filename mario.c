@@ -14,6 +14,7 @@ int main(void)
         height = get_int("Height: ");
     }
     while (height < 1 || height > 8);
+
     // Loop through positive numbers from 1 until input height
     for (int i = 1; i <= height; i++)
     {

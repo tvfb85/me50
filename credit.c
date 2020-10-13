@@ -10,14 +10,12 @@ int main(void)
     long digits = number;
     int length = 0;
 
-    // Loop over the digits divding by ten and increment the length variable for each one
+    // Loop over the digits divding by ten and incrementing the length variable for each
     while (digits)
     {
         digits /= 10;
         length++;
     }
-
-    printf("length %i\n", length);
 
     // Reset digits to full card number for next loop, and keep track of the last digit and the checksum value
     digits = number;
@@ -47,8 +45,7 @@ int main(void)
             secondDigit = lastDigit;
         }
 
-
-        // if the remainder of the loop index divided by two is zero (an even number), we need to double the card number and add it to the checksum
+        // if the remainder of the loop index divided by two is zero (an even number), we need to double the digit and add it to the checksum
         if (i % 2 == 0)
         {
             int doubled =  lastDigit * 2;
@@ -65,13 +62,13 @@ int main(void)
                 checksum += doubled;
             }
         }
-        // if the loop index is odd, we do not double the card number
+        // if the loop index is odd, we do not double the card number before adding to the checksum
         else
         {
             checksum += lastDigit;
         }
 
-        // update the remaining digits for next iteration
+        // update the remaining digits for the next iteration
         digits /= 10;
     }
 
@@ -85,36 +82,36 @@ int main(void)
         // check for valid visa card
         if (firstDigit == 4 && (length == 13 || length == 16))
         {
-            result = "VISA\n";
+            result = "VISA";
         }
 
         // check for valid american express card
         else if (firstDigit == 3 && (secondDigit == 4 || secondDigit == 7) && length == 15)
         {
-            result = "AMEX\n";
+            result = "AMEX";
         }
         // check for valid mastercard
         else if (firstDigit == 5 && length == 16)
         {
             if (secondDigit == 1 || secondDigit == 2 || secondDigit == 3 || secondDigit == 4 || secondDigit == 5)
             {
-                result = "MASTERCARD\n";
+                result = "MASTERCARD";
             }
             else
             {
-                result = "INVALID\n";
+                result = "INVALID";
             }
         }
         else
         {
-            result = "INVALID\n";
+            result = "INVALID";
         }
     }
     else
     {
-        result = "INVALID\n";
+        result = "INVALID";
     }
 
     // print the result
-    printf("%s", result);
+    printf("%s\n", result);
 }

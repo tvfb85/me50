@@ -95,5 +95,5 @@ int main(void)
         result = "INVALID\n";
     }
 
-    printf("%s\n", result);
+    printf("%s", result);
 }

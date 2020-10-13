@@ -6,24 +6,23 @@ int main(void)
     // Ask user for creditcard number
     long number = get_long("Number: ");
 
-    // Set up variables to check the length of the creditcard number
-    long digits;
-    digits = number;
+    // Keep track of the card number's digits and length
+    long digits = number;
     int length = 0;
 
-    // Loop over the creditcard divding by ten and save a count of the digits
+    // Loop over the digits divding by ten and increment the length variable for each one
     while (digits)
     {
         digits /= 10;
         length++;
     }
 
-    // Set up variable to save checksum value
-    int checksum = 0;
+    printf("length %i\n", length);
 
-    // Keep a track of the last number and remaining number for the checksum calculation
+    // Reset digits to full card number for next loop, and keep track of the last digit and the checksum value
+    digits = number;
     int lastDigit;
-    long remainingDigits = number;
+    int checksum = 0;
 
     // Initialize variables to save the first and second card digits to later check the card type
     int firstDigit;
@@ -33,28 +32,28 @@ int main(void)
     for (int i = 1; i <= length; i++)
     {
 
-        // get the last number of the card
-        lastDigit = remainingDigits % 10;
+        // get the last digit of the card
+        lastDigit = digits % 10;
 
-        // if the iteration index matches the length of the card, the first number is reached and saved
+        // if the iteration index matches the length of the card, the first digit has been reached and is saved
         if (i == length)
         {
             firstDigit = lastDigit;
         }
 
-        // if the iteration index is one less than the length of the card, the second number is reached and saved
+        // if the iteration index is one less than the length of the card, the second digit has been reached and is saved
         if (i == length - 1)
         {
             secondDigit = lastDigit;
         }
 
 
-        // if the remainder of the index modulo 2 is zero, we need to double the card number and save to the checksum
+        // if the remainder of the loop index divided by two is zero (an even number), we need to double the card number and add it to the checksum
         if (i % 2 == 0)
         {
             int doubled =  lastDigit * 2;
 
-            // if the doubled number is double-figures, we add them together before adding the total to the checksum
+            // if the doubled number is double-figures, we add them together before adding to the checksum
             if (doubled > 9)
             {
                 int n1 = doubled % 10;
@@ -66,14 +65,14 @@ int main(void)
                 checksum += doubled;
             }
         }
-        // if the remainder of the index modulo 2 isn't zero, we do not multiple the card number
+        // if the loop index is odd, we do not double the card number
         else
         {
             checksum += lastDigit;
         }
 
-        // update where we are in the loop
-        remainingDigits /= 10;
+        // update the remaining digits for next iteration
+        digits /= 10;
     }
 
     // initialize variable to save the result

@@ -12,7 +12,8 @@ int main(void)
     int length = 0;
 
     // Loop over the creditcard divding by ten and save a count of the digits
-    while (n) {
+    while (n)
+    {
         n /= 10;
         length++;
     }
@@ -60,7 +61,8 @@ int main(void)
                 int n2 = doubled / 10;
                 checksum += (n1 + n2);
             }
-            else {
+            else
+            {
                 checksum += doubled;
             }
         }
@@ -109,7 +111,8 @@ int main(void)
             result = "INVALID\n";
         }
     }
-    else {
+    else
+    {
         result = "INVALID\n";
     }
 

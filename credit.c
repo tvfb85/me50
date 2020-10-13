@@ -1,25 +1,26 @@
 #include <stdio.h>
 #include <cs50.h>
-#include <math.h>
 
 int main(void)
 {
-    int length;
+    int length = 0;
     long number;
     long n;
+    string result;
 
-    do
-    {
-        length = 0;
-        number = get_long("Number: ");
-        n = number;
+    // do
+    // {
+    //     length = 0;
+    number = get_long("Number: ");
+    // }
+    // while (length < 13 || length > 16);
 
-        while (n) {
-            n /= 10;
-            length++;
-        }
+    n = number;
+
+    while (n) {
+        n /= 10;
+        length++;
     }
-    while (length < 13 || length > 16);
 
     int checksum = 0;
     int lastNumber;
@@ -62,8 +63,6 @@ int main(void)
 
         remainingNumber /= 10;
     }
-
-    string result;
 
     if (checksum % 10 == 0)
     {

@@ -4,6 +4,7 @@
 #include <cs50.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 void encodetext(string plaintext, string key);
 
@@ -32,8 +33,8 @@ int main(int argc, string argv[])
         }
     }
 
-    char haystack[27];
-    haystack[27] = '\0';
+    char *haystack = malloc(27);
+    haystack[26] = '\0';
 
     for (int i = 0; key[i] != '\0'; i++)
     {
@@ -49,6 +50,8 @@ int main(int argc, string argv[])
             haystack[i] = key[i];
         }
     }
+
+    free(haystack);
 
     string plaintext = get_string("plaintext: ");
 

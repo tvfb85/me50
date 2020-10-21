@@ -35,7 +35,7 @@ int main(int argc, string argv[])
     char haystack[27];
     haystack[26] = '\0';
 
-    for (int i = 0; i < strlen(key); i++)
+    for (int i = 0; key[i] != '\0'; i++)
     {
         char needle[2] = { key[i], '\0' };
         string match = strcasestr(haystack, needle);

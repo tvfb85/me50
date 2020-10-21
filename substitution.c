@@ -33,7 +33,7 @@ int main(int argc, string argv[])
     }
 
     char haystack[27];
-    haystack[26] = '\0';
+    haystack[27] = '\0';
 
     for (int i = 0; key[i] != '\0'; i++)
     {

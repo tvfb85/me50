@@ -184,7 +184,7 @@ bool print_winner(void)
         }
     }
 
-    if (highestscore >= round(voter_count / 2))
+    if (highestscore >= voter_count / 2)
     {
         printf("%s\n", winner);
         return true;

@@ -36,7 +36,7 @@ void lock_pairs(void);
 void print_winner(void);
 void bubble_sort(pair arr[], int size);
 bool creates_cyle(int winner, int loser);
-bool winner_exists(int count, string winners[]);
+bool winner_exists(string locked_candidate, int count, string winners[]);
 
 int main(int argc, string argv[])
 {
@@ -160,11 +160,9 @@ void lock_pairs(void)
     {
         if (!creates_cyle(pairs[i].winner, pairs[i].loser))
         {
-            printf("didnt create cycle");
             locked[pairs[i].winner][pairs[i].loser] = true;
         }
     }
-    printf("locked first pair: %s\n", locked[0][1] ? "true" : "false");
     return;
 }
 
@@ -176,28 +174,17 @@ void print_winner(void)
 
     for (int i = 0; i < candidate_count; i++)
     {
-        // bool has_arrow_pointer = false;
-
         for (int j = 0; j < candidate_count; j++)
         {
             if (locked[i][j] == true)
             {
-                // has_arrow_pointer = true;
-                if (!winner_exists(count, winners))
+                if (!winner_exists(candidates[i], count, winners))
                 {
                     winners[count] = candidates[i];
                     count++;
                 }
             }
         }
-
-        // for (int k = 0; k < candidate_count; k++)
-        // {
-        //     if (!has_arrow_pointer && locked[i][k] == true)
-        //     {
-        //         printf("%s\n", candidates[i]);
-        //     }
-        // }
     }
 
    for (int k = 0; k < count; k++)
@@ -209,20 +196,15 @@ void print_winner(void)
 
 bool creates_cyle(int winner, int loser)
 {
-    printf("winner: %i, loser: %i\n", winner, loser);
-    printf("locked loser winner %i\n", locked[loser][winner]);
     if (locked[loser][winner] == true)
     {
-        printf("shouldnt get here1");
         return true;
     }
 
     for (int i = 0; i < candidate_count; i++)
     {
-        printf("looping, locked i winner %i\n", locked[i][winner]);
         if (locked[i][winner] == true)
         {
-            printf("shouldnt get here");
             return creates_cyle(i, loser);
         }
     }
@@ -234,16 +216,11 @@ void bubble_sort(pair arr[], int size)
 {
     for (int i = 0; i < size - 1; i++)
     {
-        printf("SORTING pairs, winner: %i, loser: %i\n", arr[i].winner, arr[i].loser);
         int diff = preferences[arr[i].winner][arr[i].loser] - preferences[arr[i].loser][arr[i].winner];
-
-        printf("the next pair winner votes: %i, the next pair loser votes: %i\n", preferences[arr[i + 1].winner][arr[i + 1].loser], preferences[arr[i + 1].loser][arr[i + 1].winner]);
         int diff1 = preferences[arr[i + 1].winner][arr[i + 1].loser] - preferences[arr[i + 1].loser][arr[i + 1].winner];
 
-        printf("diff: %i, %i\n", diff, diff1);
         if (diff < diff1)
         {
-            printf("sorting!! %i, %i\n", arr[i].winner, arr[i - 1].winner);
             pair temp = arr[i];
             arr[i] = arr[i + 1];
             arr[i + 1] = temp;
@@ -255,11 +232,11 @@ void bubble_sort(pair arr[], int size)
 	}
 }
 
-bool winner_exists(int count, string winners[])
+bool winner_exists(string locked_candidate, int count, string winners[])
 {
     for (int i = 0; i < count; i++)
     {
-        if (strcmp(winners[i], candidates[i]) == 0)
+        if (strcmp(winners[i], locked_candidate) == 0)
         {
             return true;
         }

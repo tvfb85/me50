@@ -53,9 +53,9 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-    for (int i = 0; i <= height; i++)
+    for (int i = 0; i < height; i++)
     {
-        for (int j = 0; j <= round(width / 2); j++)
+        for (int j = 0; j < round(width / 2); j++)
         {
             RGBTRIPLE temp = image[i][j];
             image[i][j] = image[i][(width - j) - 1];
@@ -102,11 +102,11 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
             int pixelcount;
 
-            if ((i == 0 && j == 0) || (i == height && j == 0) || (i == 0 && j == width) || (i == height && j == width))
+            if ((i == 0 && j == 0) || (i == (height - 1) && j == 0) || (i == 0 && j == (width - 1)) || (i == (height - 1) && j == (width - 1)))
             {
                 pixelcount = 4;
             }
-            else if (i == 0 || j == 0 || i == height || j == width)
+            else if (i == 0 || j == 0 || i == (height - 1) || j == (width - 1))
             {
                 pixelcount = 6;
             }

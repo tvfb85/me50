@@ -93,9 +93,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 {
                     if (i + k >= 0 && j + l >= 0 && i + k < height && j + l < height)
                     {
-                        redcount += round(temp[i + k][j + l].rgbtRed);
-                        greencount += round(temp[i + k][j + l].rgbtGreen);
-                        bluecount += round(temp[i + k][j + l].rgbtBlue);
+                        redcount += temp[i + k][j + l].rgbtRed;
+                        greencount += temp[i + k][j + l].rgbtGreen;
+                        bluecount += temp[i + k][j + l].rgbtBlue;
                     }
                 }
             }
@@ -115,9 +115,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 pixelcount = 9;
             }
 
-            image[i][j].rgbtRed = redcount / pixelcount;
-            image[i][j].rgbtGreen = greencount / pixelcount;
-            image[i][j].rgbtBlue = bluecount / pixelcount;
+            image[i][j].rgbtRed = round(redcount / (float) pixelcount);
+            image[i][j].rgbtGreen = round(greencount / (float) pixelcount);
+            image[i][j].rgbtBlue = round(bluecount / (float) pixelcount);
         }
     }
 

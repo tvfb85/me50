@@ -131,8 +131,10 @@ bool vote(int voter, int rank, string name)
 {
     for (int i = 0; i < candidate_count; i++)
     {
+        // Find a candidate with a matching name
         if (strcmp(candidates[i].name, name) == 0)
         {
+            // Update preferences with voter's ranked candidates
             preferences[voter][rank] = i;
             return true;
         }
@@ -143,6 +145,7 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
+    // Calculate votes for each candidate based on the voter's preferences, checking the candidate has not already been eliminated
     for (int i = 0; i < voter_count; i++)
     {
         if (!candidates[preferences[i][0]].eliminated)
@@ -164,9 +167,11 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
+    // Initialize variables to record the highest score and the winner's name
     int highestscore = 0;
     string winner;
 
+    // Loop the candidates and check if their vote count exceeds the highest score found so far
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes > highestscore)
@@ -176,6 +181,7 @@ bool print_winner(void)
         }
     }
 
+    // Check for any candidates with equal vote counts
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == highestscore && candidates[i].name != winner)
@@ -184,6 +190,7 @@ bool print_winner(void)
         }
     }
 
+    // Print the winner if the candidate has scored over half the vote
     if (highestscore > voter_count / 2)
     {
         printf("%s\n", winner);
@@ -196,8 +203,10 @@ bool print_winner(void)
 // Return the minimum number of votes any remaining candidate has
 int find_min(void)
 {
+    // Initialize lowest vote tally to number of voters
     int lowest = voter_count;
 
+    // For each candidate that has not yet been eliminated, find the lowest vote count
     for (int i = 0; i < candidate_count; i++)
     {
         if (!candidates[i].eliminated)
@@ -209,12 +218,14 @@ int find_min(void)
         }
     }
 
+    // Return the lowest number of votes
     return lowest;
 }
 
 // Return true if the election is tied between all candidates, false otherwise
 bool is_tie(int min)
 {
+    // Return false if any candidate does not have an equal vote count
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes > min)
@@ -228,6 +239,7 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidates) in last place
 void eliminate(int min)
 {
+    // For any candidate who has the minimum number of votes set their eliminated flag to true
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min)

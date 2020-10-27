@@ -42,13 +42,19 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 
             // Account for results higher than the maximum value for an 8-bit color value
             if (sepiaRed > 255)
+            {
                 sepiaRed = 255;
+            }
 
             if (sepiaGreen > 255)
+            {
                 sepiaGreen = 255;
+            }
 
             if (sepiaBlue > 255)
+            {
                 sepiaBlue = 255;
+            }
 
             // Replace the pixel's color values with the calculated sepia values
             image[i][j].rgbtRed = sepiaRed;

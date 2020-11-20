@@ -61,7 +61,7 @@ unsigned int hash(const char *word)
     int total = 0;
 
     // Loop over each character in word
-    for(int i = 0; word[i] != '\0'; i++)
+    for (int i = 0; word[i] != '\0'; i++)
     {
         // Sum lowercase ASCII code values
         total += tolower(word[i]);
@@ -90,7 +90,8 @@ bool load(const char *dictionary)
             node *n = malloc(sizeof(node));
 
             // Ensure memory was successfully allocated
-            if (n == NULL) {
+            if (n == NULL)
+            {
                 return false;
             }
 
@@ -153,7 +154,8 @@ bool unload(void)
     }
 
     // Check memory for all indices has been freed
-    if (unloaded == 25) {
+    if (unloaded == 25)
+    {
         return true;
     }
 

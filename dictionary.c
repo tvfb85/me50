@@ -18,13 +18,13 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 26;
+const unsigned int N = 25;
 
 // Hash table
 node *table[N];
 
-unsigned int hash_value;
-unsigned int wordcount = 0;
+// Initialize wordcount variable with default value of 0
+int wordcount = 0;
 
 // Returns true if word is in dictionary else false
 bool check(const char *word)
@@ -50,46 +50,65 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    unsigned int total = 0;
+    // Initialize variable to store ASCII code values
+    int total = 0;
 
+    // Loop over each character in word
     for(int i = 0; word[i] != '\0'; i++)
     {
+        // Sum lowercase ASCII code values
         total += tolower(word[i]);
     }
 
+    // Return positive index between 0 and 25 (for each alphabetic character)
     return total % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
+    // Read file
     FILE *file = fopen(dictionary, "r");
 
+    // Check file exists
     if (file != NULL)
     {
+        // Setup word variable with additional space for terminating NUL character
         char word[LENGTH + 1];
 
+        // Read words until end of file
         while (fscanf(file, "%s", word) != EOF)
         {
+            // Allocate memory for a new node
             node *n = malloc(sizeof(node));
 
+            // Ensure memory was successfully allocated
             if (n == NULL) {
                 return false;
             }
 
+            // Copy string into node
             strcpy(n->word, word);
 
+            // Get hash value
             int index = hash(word);
 
+            // Store table index as pointer in node
             n->next = table[index];
 
+            // Store node in table at index of hash value
             table[index] = n;
 
+            // Increment word count
             wordcount++;
         }
+
+        // Close file and return true
         fclose(file);
         return true;
     }
+
+    // Return false if file failed to open
     return false;
 }
 
@@ -118,7 +137,7 @@ bool unload(void)
         unloaded++;
     }
 
-    if (unloaded == 26) {
+    if (unloaded == 25) {
         return true;
     }
 

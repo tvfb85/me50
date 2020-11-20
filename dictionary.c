@@ -29,12 +29,18 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
+    // Get hash value for word to be checked
     int index = hash(word);
 
+    // Handle edge case where nothing is yet stored at table index
     if (table[index] == NULL)
     {
         return false;
     }
+
+    // Set a temp node to point at the first node stored at the table index
+    // Check each node's word value for a match and return true if found
+    // Otherwise reassign the temp node to point at the next node and repeat until temp points at NULL;
 
     for (node *tmp = table[index]; tmp != NULL; tmp = tmp->next)
     {
@@ -44,6 +50,7 @@ bool check(const char *word)
         }
     }
 
+    // Return false if word is not found in dictionary
     return false;
 }
 
@@ -121,25 +128,35 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
+    // Keep a count of number of linked lists freed
     int unloaded = 0;
 
+    // Loop over each index in the table
     for (int i = 0; i < N; i++)
     {
+        // Create a node to point at the first node at the current table index
         node *cursor = table[i];
 
+        // Loop each node until the cursor node points at NULL
         while (cursor != NULL)
         {
+            // Use a temp node to store the cursors current value
             node *tmp = cursor;
+            // Resassign cursor to point at the next node
             cursor = cursor->next;
+            // Free the temp node
             free(tmp);
         }
 
+        // Increment number of unloaded indexes
         unloaded++;
     }
 
+    // Check memory for all indices has been freed
     if (unloaded == 25) {
         return true;
     }
 
+    // Return false if unsuccessful
     return false;
 }

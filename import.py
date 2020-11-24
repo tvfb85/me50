@@ -5,6 +5,7 @@ import csv
 # Setup db connection
 db = SQL("sqlite:///students.db")
 
+print(argv[1])
 # Check arguments length
 if len(argv) != 2:
     print(f'Usage: {argv[0]} [characters.csv]')
@@ -33,14 +34,19 @@ with open(argv[1], 'r') as csv_file:
             middle = names[1]
             last = names[2]
 
+            # Execute query to insert student into db
+            db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
+                       first, middle, last, row['house'], int(row['birth']))
+
         # Set middle name to None if only first and last name exist
         else:
             first = names[0]
             middle = None
             last = names[1]
 
-        # Execute query to insert student into db
-        db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
-                   first, middle, last, row['house'], int(row['birth']))
+            # Execute query to insert student into db
+            db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
+                       first, middle, last, row['house'], int(row['birth']))
+
 
 exit(0)

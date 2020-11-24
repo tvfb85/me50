@@ -5,15 +5,14 @@ import csv
 # Setup db connection
 db = SQL("sqlite:///students.db")
 
-print(argv[1])
 # Check arguments length
 if len(argv) != 2:
-    print(f'Usage: {argv[0]} [characters.csv]')
+    print(f'Usage: {argv[0]} filename.csv')
     exit(1)
 
-# Check second argument is the filename expected
-elif argv[1] != 'characters.csv':
-    print(f'Unrecognised filename...\nUsage: {argv[0]} [characters.csv]')
+# Check file is of type csv
+elif not argv[1].endswith('.csv'):
+    print('Unrecognised file type')
     exit(1)
 
 # Open csv file in read mode
@@ -24,7 +23,6 @@ with open(argv[1], 'r') as csv_file:
 
     # Loop rows of csv file
     for row in reader:
-
         # Split name to get list of first, middle and last names
         names = row['name'].split(' ')
 
@@ -34,19 +32,14 @@ with open(argv[1], 'r') as csv_file:
             middle = names[1]
             last = names[2]
 
-            # Execute query to insert student into db
-            db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
-                       first, middle, last, row['house'], int(row['birth']))
-
         # Set middle name to None if only first and last name exist
         else:
             first = names[0]
             middle = None
             last = names[1]
 
-            # Execute query to insert student into db
-            db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
-                       first, middle, last, row['house'], int(row['birth']))
+        # Execute query to insert student into db
+        db.execute('INSERT INTO students (first, middle, last, house, birth) VALUES(?,?,?,?,?)',
+                   first, middle, last, row['house'], int(row['birth']))
 
-
-exit(0)
+    exit(0)
